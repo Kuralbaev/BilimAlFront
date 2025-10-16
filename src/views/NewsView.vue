@@ -12,8 +12,14 @@
         />
         <div class="py-5">
           <div class="flex items-center gap-2 mb-5">
-            <span class="bg-blue-500 px-2 py-1 text-white text-xs">News</span>
-            <p class="text-sm text-gray-500">12.02.2025</p>
+            <span class="bg-blue-500 px-2 py-1 text-white text-xs">
+              {{ currentNews?.category?.title }}
+            </span>
+            <p class="text-sm text-gray-500">
+              {{
+                new Date(currentNews?.publishedAt).toLocaleDateString('ru-RU')
+              }}
+            </p>
           </div>
           <h2 class="text-2xl font-bold mb-4">
             {{ currentNews?.title }}
