@@ -4,32 +4,36 @@
     :class="list ? 'grid-cols-[1fr]' : 'grid-cols-[200px_1fr]'"
   >
     <img
-      src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg"
+      :src="'https://admin.eduai.kz' + news?.image?.url"
       alt=""
-      class="w-full h-full min-h-[140px] object-cover opacity-80"
+      class="w-full h-full min-h-[140px] object-cover"
     />
     <div class="p-3">
       <div class="flex items-center gap-2">
-        <span class="bg-blue-500 px-2 py-1 text-white text-xs">News</span>
-        <p class="text-sm text-gray-500">12.02.2025</p>
+        <span class="bg-blue-500 px-2 py-1 text-white text-xs">
+          {{ news?.category?.title || 'Новости' }}
+        </span>
+        <p class="text-sm text-gray-500">
+          {{ new Date(news?.publishedAt).toLocaleDateString('ru-RU') }}
+        </p>
       </div>
       <router-link
-        to="/news/1"
+        :to="`/news/${news?.documentId}`"
         class="text-lg font-bold mb-2 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+        {{ news?.title }}
       </router-link>
       <p class="text-sm text-gray-500 line-clamp-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+        {{ news?.description }}
       </p>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import type { News } from '../../types/api'
 defineProps<{
   mini?: boolean
   list?: boolean
+  news: News
 }>()
 </script>

@@ -1,19 +1,14 @@
-export interface Product {
+export interface News {
   id: number
-  name: string
-  description: string
-  price: number
-  category: string
-  image?: string
-  createdAt: string
-  updatedAt: string
-}
-
-export interface User {
-  id: number
-  email: string
-  name: string
-  role: 'admin' | 'user'
+  title: string
+  category: {
+    title: string
+  }
+  description?: string
+  image?: any
+  count: string
+  documentId?: string
+  youtube_link?: string
 }
 
 export interface ApiResponse<T> {

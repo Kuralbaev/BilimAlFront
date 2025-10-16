@@ -8,17 +8,18 @@
     <div class="absolute bottom-0 left-0 right-0 text-white px-4">
       <a
         target="_blank"
-        href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        :href="news?.youtube_link"
         class="font-bold mb-4 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, Lorem
-        ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+        {{ news.title }}
       </a>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import type { News } from '../../types/api'
 defineProps<{
   mini?: boolean
+  news: News
 }>()
 </script>
