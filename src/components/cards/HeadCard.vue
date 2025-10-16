@@ -4,7 +4,7 @@
     :class="mini ? 'h-full' : 'max-h-[450px] min-h-[400px]'"
   >
     <img
-      src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg"
+      :src="'https://admin.eduai.kz' + news?.image?.url"
       alt=""
       class="w-full h-full object-cover opacity-80"
     />
@@ -16,7 +16,7 @@
         {{ news?.category?.title || 'Новости' }}
       </p>
       <router-link
-        :to="`/news/${news?.id}`"
+        :to="`/news/${news?.documentId}`"
         class="font-bold mb-4 line-clamp-2 hover:text-[#00B5EE] transition-colors"
         :class="mini ? 'text-base' : 'text-2xl'"
       >

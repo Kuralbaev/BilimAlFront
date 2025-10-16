@@ -1,9 +1,9 @@
 <template>
   <div class="card rounded-xl overflow-hidden relative bg-black">
     <img
-      src="https://www.wearegecko.co.uk/media/50316/mountain-3.jpg"
+      :src="'https://admin.eduai.kz' + news?.image?.url"
       alt="YouTube"
-      class="w-full h-full object-cover opacity-80"
+      class="w-full h-full object-cover"
     />
     <div class="absolute bottom-0 left-0 right-0 text-white px-4">
       <a
