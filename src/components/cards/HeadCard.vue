@@ -13,14 +13,14 @@
       :class="mini ? 'px-4 py-0' : 'px-8 py-4'"
     >
       <p class="text-sm mb-3 leading-none p-1 w-max px-2 bg-blue-500">
-        {{ news?.category?.title || 'Новости' }}
+        {{ news?.category?.title_ru || 'Новости' }}
       </p>
       <router-link
         :to="`/news/${news?.documentId}`"
         class="font-bold mb-4 line-clamp-2 hover:text-[#00B5EE] transition-colors"
         :class="mini ? 'text-base' : 'text-2xl'"
       >
-        {{ news?.title || 'Новость' }}
+        {{ news?.title_ru || 'Новость' }}
       </router-link>
     </div>
   </div>

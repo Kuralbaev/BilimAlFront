@@ -13,7 +13,7 @@
         <div class="py-5">
           <div class="flex items-center gap-2 mb-5">
             <span class="bg-blue-500 px-2 py-1 text-white text-xs">
-              {{ currentNews?.category?.title }}
+              {{ currentNews?.category?.title_ru }}
             </span>
             <p class="text-sm text-gray-500">
               {{
@@ -22,7 +22,7 @@
             </p>
           </div>
           <h2 class="text-2xl font-bold mb-4">
-            {{ currentNews?.title }}
+            {{ currentNews?.title_ru }}
           </h2>
           <p class="text-base text-gray-500 line-clamp-2">
             {{ currentNews?.description }}

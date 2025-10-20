@@ -1,10 +1,13 @@
 export interface News {
   id: number
-  title: string
+  title_ru: string
+  title_kk: string
   category: {
-    title: string
+    title_ru: string
+    title_kk: string
   }
-  description?: string
+  description_ru?: string
+  description_kk?: string
   image?: any
   count: string
   documentId?: string

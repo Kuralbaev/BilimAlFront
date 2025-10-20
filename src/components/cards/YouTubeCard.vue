@@ -11,7 +11,7 @@
         :href="news?.youtube_link"
         class="font-bold mb-4 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
-        {{ news.title }}
+        {{ news?.title_ru }}
       </a>
     </div>
   </div>

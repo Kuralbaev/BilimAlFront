@@ -43,7 +43,7 @@
               <div>
                 <div class="flex items-center gap-2 mb-2">
                   <span class="bg-blue-500 px-2 py-1 text-white text-xs">
-                    {{ item.category?.title || 'Новости' }}
+                    {{ item.category?.title_ru || 'Новости' }}
                   </span>
                   <p class="text-sm text-gray-500">12.02.2025</p>
                 </div>
@@ -51,7 +51,7 @@
                   :to="`/news/${item.id}`"
                   class="text-base font-bold line-clamp-2 hover:text-[#00B5EE] transition-colors"
                 >
-                  {{ item.title }}
+                  {{ item.title_ru }}
                 </router-link>
               </div>
             </div>
