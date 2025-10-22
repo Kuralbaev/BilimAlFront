@@ -32,6 +32,9 @@ dependencies:
   sass:
     specifier: ^1.90.0
     version: 1.90.0
+  swiper:
+    specifier: ^12.0.3
+    version: 12.0.3
   tailwindcss:
     specifier: ^4.1.12
     version: 4.1.12
@@ -2652,6 +2655,11 @@ packages:
     dependencies:
       has-flag: 4.0.0
     dev: true
+
+  /swiper@12.0.3:
+    resolution: {integrity: sha512-BHd6U1VPEIksrXlyXjMmRWO0onmdNPaTAFduzqR3pgjvi7KfmUCAm/0cj49u2D7B0zNjMw02TSeXfinC1hDCXg==}
+    engines: {node: '>= 4.7.0'}
+    dev: false
 
   /synckit@0.11.11:
     resolution: {integrity: sha512-MeQTA1r0litLUf0Rp/iisCaL8761lKAZHaimlbGK4j0HysC4PLfqygQj9srcs0m2RdtDYnF8UuYyKpbjHYp7Jw==}

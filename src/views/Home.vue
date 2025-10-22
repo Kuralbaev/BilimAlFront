@@ -1,7 +1,14 @@
 <template>
-  <div class="">
+  <div class="p-4 pt-0">
     <div class="container mx-auto">
-      <div class="header pt-10 grid grid-cols-[3fr_1fr] gap-4">
+      <Slider :slideCount="1" v-if="isMobile()" class="my-5">
+        <template v-for="item in news" :key="item.id">
+          <SwiperSlide>
+            <HeadCard :news="item" />
+          </SwiperSlide>
+        </template>
+      </Slider>
+      <div class="header pt-10 grid grid-cols-[3fr_1fr] gap-4" v-else>
         <HeadCard :news="news[0]" />
         <div class="grid grid-cols-1 gap-4">
           <HeadCard
@@ -13,7 +20,7 @@
         </div>
       </div>
 
-      <div class="news pt-20">
+      <div class="news pt-10 md:pt-20">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-bold">Новости</h2>
           <div
@@ -25,7 +32,7 @@
           </div>
         </div>
 
-        <div class="header pt-5 grid grid-cols-[3fr_1fr] gap-4">
+        <div class="header pt-5 grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-4">
           <div>
             <NewsCard
               v-for="item in news.slice(3, 8)"
@@ -48,7 +55,7 @@
                   <p class="text-sm text-gray-500">12.02.2025</p>
                 </div>
                 <router-link
-                  :to="`/news/${item.id}`"
+                  :to="`/news/${item.documentId}`"
                   class="text-base font-bold line-clamp-2 hover:text-[#00B5EE] transition-colors"
                 >
                   {{ item.title_ru }}
@@ -71,7 +78,14 @@
           </div>
         </div>
 
-        <div class="header pt-5 grid grid-cols-3 gap-4">
+        <Slider :slideCount="1" v-if="isMobile()" class="my-5">
+          <template v-for="item in youTube" :key="item.id">
+            <SwiperSlide>
+              <YouTubeCard :news="item" />
+            </SwiperSlide>
+          </template>
+        </Slider>
+        <div class="header pt-5 grid grid-cols-3 gap-4" v-else>
           <YouTubeCard
             v-for="item in youTube.slice(0, 3)"
             :key="item.id"
@@ -80,11 +94,13 @@
         </div>
       </div>
     </div>
-    <div class="feedback mt-20 p-20 bg-[#08082c] text-white">
-      <div class="container mx-auto grid grid-cols-2 gap-4">
+    <div
+      class="feedback md:mt-20 p-5 md:p-20 bg-[#08082c] text-white rounded-xl md:rounded-none"
+    >
+      <div class="container mx-auto grid md:grid-cols-2 gap-4">
         <div>
-          <h2 class="text-[40px] mb-3">Обратная связь</h2>
-          <p class="text-lg">
+          <h2 class="text-2xl md:text-[40px] mb-3">Обратная связь</h2>
+          <p class="text-base md:text-lg">
             Если у вас есть вопросы, предложения или вы хотите связаться с нами,
             пожалуйста, заполните форму. Мы постараемся ответить вам в
             кратчайшие сроки.
@@ -106,11 +122,14 @@
 <script setup lang="ts">
 import { ArrowRightOutlined } from '@ant-design/icons-vue'
 import { storeToRefs } from 'pinia'
+import { SwiperSlide } from 'swiper/vue'
 import BaseButton from '../components/BaseButton.vue'
 import HeadCard from '../components/cards/HeadCard.vue'
 import NewsCard from '../components/cards/NewsCard.vue'
 import YouTubeCard from '../components/cards/YouTubeCard.vue'
+import Slider from '../components/Slider.vue'
 import { useNewsStore } from '../store/NewsStore'
+import { isMobile } from '../utils'
 const newsStore = useNewsStore()
 
 const { news, youTube } = storeToRefs(newsStore)

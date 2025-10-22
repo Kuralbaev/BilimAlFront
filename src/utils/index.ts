@@ -8,3 +8,7 @@ export const validation = {
     return password.length >= 8
   },
 }
+
+export const isMobile = () => {
+  return window.innerWidth < 768
+}

@@ -10,10 +10,10 @@
     />
     <div class="p-3">
       <div class="flex items-center gap-2">
-        <span class="bg-blue-500 px-2 py-1 text-white text-xs">
+        <span class="bg-blue-500 px-1 py-1 text-white text-[10px] md:text-xs">
           {{ news?.category?.title_ru || 'Новости' }}
         </span>
-        <p class="text-sm text-gray-500">
+        <p class="text-[10px] md:text-sm text-gray-500">
           {{ new Date(news?.publishedAt).toLocaleDateString('ru-RU') }}
         </p>
       </div>

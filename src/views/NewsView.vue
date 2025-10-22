@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-5 md:p-0">
     <div v-if="loading" class="flex justify-center items-center pt-20 w-full">
       <a-spin tip="Загрузка..." />
     </div>
@@ -8,7 +8,7 @@
         <img
           :src="'https://admin.eduai.kz' + currentNews?.image?.url"
           alt=""
-          class="w-full h-full min-h-[140px] object-cover"
+          class="w-full h-full min-h-[140px] object-cover rounded-xl"
         />
         <div class="py-5">
           <div class="flex items-center gap-2 mb-5">
@@ -30,7 +30,14 @@
         </div>
         <a-divider />
         <h2 class="text-2xl font-bold mb-4">Другие новости</h2>
-        <div class="grid grid-cols-3 gap-4 pt-3">
+        <Slider :slideCount="1" v-if="isMobile()" class="my-5">
+          <template v-for="item in news.slice(0, 3)" :key="item.id">
+            <SwiperSlide>
+              <NewsCard :news="item" list />
+            </SwiperSlide>
+          </template>
+        </Slider>
+        <div class="grid grid-cols-3 gap-4 pt-3" v-else>
           <NewsCard
             v-for="item in news.slice(0, 3)"
             :key="item.id"
@@ -44,10 +51,13 @@
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { SwiperSlide } from 'swiper/vue'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import NewsCard from '../components/cards/NewsCard.vue'
+import Slider from '../components/Slider.vue'
 import { useNewsStore } from '../store/NewsStore'
+import { isMobile } from '../utils'
 
 const route = useRoute()
 const newsStore = useNewsStore()
