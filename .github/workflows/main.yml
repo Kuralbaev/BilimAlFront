@@ -26,7 +26,7 @@ jobs:
           ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
       - name: Deploy
         run: |
-          ssh $SSH_USER@$SSH_HOST "cd $SSH_PATH && git pull origin main" && npm install && npm run build
+          ssh $SSH_USER@$SSH_HOST "cd $SSH_PATH && git pull origin main && npm install && npm run build"
       - name: Clean up
         run: |
           rm -rf ~/.ssh
