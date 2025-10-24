@@ -9,10 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:22-alpine
+      image: node:20
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          node-version: 20
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -21,8 +23,9 @@ jobs:
       - name: Get SSH Key and set permissions
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Pull and build
         run: |
-          ssh $SSH_USER@$SSH_HOST "cd $SSH_PATH && git pull origin main" && npm install && npm run build
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_PATH }} && git pull origin main" && npm install && npm run build
