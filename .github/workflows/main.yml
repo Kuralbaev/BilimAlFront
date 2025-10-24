@@ -23,10 +23,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+          # ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
       - name: Deploy
         run: |
-          ssh $SSH_USER@$SSH_HOST "cd $SSH_PATH && git pull origin main && npm install && npm run build"
+          ssh $SSH_USER@$SSH_HOST "cd $SSH_PATH && git pull origin main" && npm install && npm run build
       - name: Clean up
         run: |
           rm -rf ~/.ssh
