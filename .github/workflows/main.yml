@@ -19,6 +19,7 @@ jobs:
       - name: echo secrets
         run: |
           echo "SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY"
+          echo "secrets: ${{ secrets }}"
       - name: Install dependencies
         run: npm install
 
