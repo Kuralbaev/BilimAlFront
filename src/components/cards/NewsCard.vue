@@ -23,9 +23,10 @@
       >
         {{ news?.title_ru }}
       </router-link>
-      <p class="text-sm text-gray-500 line-clamp-2">
-        {{ news?.description_ru }}
-      </p>
+      <p
+        class="text-sm text-gray-500 line-clamp-2"
+        v-html="news?.description_ru"
+      />
     </div>
   </div>
 </template>

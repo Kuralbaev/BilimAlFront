@@ -24,9 +24,10 @@
           <h2 class="text-2xl font-bold mb-4">
             {{ currentNews?.title_ru }}
           </h2>
-          <p class="text-base text-gray-500 line-clamp-2">
-            {{ currentNews?.description }}
-          </p>
+          <p
+            class="text-base text-gray-500"
+            v-html="currentNews?.description_ru"
+          />
         </div>
         <a-divider />
         <h2 class="text-2xl font-bold mb-4">Другие новости</h2>
