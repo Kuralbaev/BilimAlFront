@@ -11,13 +11,15 @@
         :href="news?.youtube_link"
         class="font-bold mb-4 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
-        {{ news?.title_ru }}
+        {{ news[`title_${locale}` as keyof News] }}
       </a>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { News } from '../../types/api'
+const { locale } = useI18n()
 defineProps<{
   mini?: boolean
   news: News

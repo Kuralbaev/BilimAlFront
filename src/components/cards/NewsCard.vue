@@ -11,7 +11,7 @@
     <div class="p-3">
       <div class="flex items-center gap-2">
         <span class="bg-blue-500 px-1 py-1 text-white text-[10px] md:text-xs">
-          {{ news?.category?.title_ru || 'Новости' }}
+          {{ news?.category[`title_${locale}` as keyof News] || 'Новости' }}
         </span>
         <p class="text-[10px] md:text-sm text-gray-500">
           {{ new Date(news?.publishedAt).toLocaleDateString('ru-RU') }}
@@ -21,17 +21,20 @@
         :to="`/news/${news?.documentId}`"
         class="text-lg font-bold mb-2 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
-        {{ news?.title_ru }}
+        {{ news[`title_${locale}` as keyof News] }}
       </router-link>
       <p
         class="text-sm text-gray-500 line-clamp-2"
-        v-html="news?.description_ru"
+        v-html="news[`description_${locale}` as keyof News]"
       />
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { News } from '../../types/api'
+const { locale } = useI18n()
+
 defineProps<{
   mini?: boolean
   list?: boolean

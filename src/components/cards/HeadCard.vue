@@ -13,20 +13,22 @@
       :class="mini ? 'px-4 py-0' : 'px-8 py-4'"
     >
       <p class="text-sm mb-3 leading-none p-1 w-max px-2 bg-blue-500">
-        {{ news?.category?.title_ru || 'Новости' }}
+        {{ news?.category[`title_${locale}` as keyof News] || 'Новости' }}
       </p>
       <router-link
         :to="`/news/${news?.documentId}`"
         class="font-bold mb-4 line-clamp-2 hover:text-[#00B5EE] transition-colors"
         :class="mini ? 'text-base' : 'text-2xl'"
       >
-        {{ news?.title_ru || 'Новость' }}
+        {{ news[`title_${locale}` as keyof News] || 'Новость' }}
       </router-link>
     </div>
   </div>
 </template>
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 import type { News } from '../../types/api'
+const { locale } = useI18n()
 defineProps<{
   mini?: boolean
   news: News

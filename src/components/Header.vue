@@ -8,38 +8,63 @@
           alt="logo"
           class="h-14 cursor-pointer"
         />
-        <MenuOutlined
-          class="!text-white text-xl cursor-pointer"
-          @click="open = true"
-        />
+
+        <div class="flex items-center gap-4">
+          <a-dropdown>
+            <p
+              class="cursor-pointer flex items-center gap-2 border border-white rounded-full px-3 py-1 text-white text-sm"
+            >
+              {{ locale === 'ru' ? 'Рус' : 'Қаз' }}
+              <DownOutlined />
+            </p>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item>
+                  <p @click="((locale = 'ru'), (currentLocale = 'ru'))">Рус</p>
+                </a-menu-item>
+                <a-menu-item>
+                  <p @click="((locale = 'kk'), (currentLocale = 'kk'))">Қаз</p>
+                </a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+          <MenuOutlined
+            class="!text-white text-xl cursor-pointer"
+            @click="open = true"
+          />
+        </div>
       </div>
       <a-drawer v-model:open="open" placement="right">
         <ul class="text-nowrap w-full text-base" @click="open = false">
           <li class="mb-4">
             <router-link to="/" exact class="!text-gray-900">
-              Главный
+              {{ $t('main') }}
             </router-link>
           </li>
           <li class="mb-4">
             <router-link to="/news" exact class="!text-gray-900">
-              Новости
+              {{ $t('news') }}
             </router-link>
           </li>
           <li class="mb-4">
             <router-link to="/youtube" exact class="!text-gray-900">
-              YouTube
+              {{ $t('youtube') }}
             </router-link>
           </li>
           <li class="mb-4">
             <router-link to="/about" exact class="!text-gray-900">
-              О нас
+              {{ $t('about') }}
             </router-link>
           </li>
         </ul>
         <a-divider />
         <div class="text-blue-500 flex items-center justify-start gap-3">
-          <BaseIcon name="instagram" />
-          <BaseIcon name="facebook" />
+          <a
+            href="https://www.instagram.com/bilimai.kz?igsh=aXhwcjcxOXdhM3R1"
+            target="_blank"
+          >
+            <BaseIcon name="instagram" />
+          </a>
         </div>
       </a-drawer>
     </div>
@@ -57,21 +82,43 @@
         />
         <ul class="flex items-center gap-8 text-nowrap text-white">
           <li>
-            <router-link to="/" exact>Главный</router-link>
+            <router-link to="/" exact>{{ $t('main') }}</router-link>
           </li>
           <li>
-            <router-link to="/news" exact>Новости</router-link>
+            <router-link to="/news" exact>{{ $t('news') }}</router-link>
           </li>
           <li>
-            <router-link to="/youtube" exact>YouTube</router-link>
+            <router-link to="/youtube" exact>{{ $t('youtube') }}</router-link>
           </li>
           <li>
-            <router-link to="/about" exact>О нас</router-link>
+            <router-link to="/about" exact>{{ $t('about') }}</router-link>
           </li>
         </ul>
         <div class="flex items-center justify-end gap-4 text-white">
-          <BaseIcon name="instagram" />
-          <BaseIcon name="facebook" />
+          <a-dropdown>
+            <p
+              class="cursor-pointer flex items-center gap-2 border border-white rounded-full px-3 py-1"
+            >
+              {{ locale === 'ru' ? 'Рус' : 'Қаз' }}
+              <DownOutlined />
+            </p>
+            <template #overlay>
+              <a-menu>
+                <a-menu-item>
+                  <p @click="((locale = 'ru'), (currentLocale = 'ru'))">Рус</p>
+                </a-menu-item>
+                <a-menu-item>
+                  <p @click="((locale = 'kk'), (currentLocale = 'kk'))">Қаз</p>
+                </a-menu-item>
+              </a-menu>
+            </template>
+          </a-dropdown>
+          <a
+            href="https://www.instagram.com/bilimai.kz?igsh=aXhwcjcxOXdhM3R1"
+            target="_blank"
+          >
+            <BaseIcon name="instagram" />
+          </a>
         </div>
       </div>
     </div>
@@ -79,9 +126,21 @@
 </template>
 
 <script setup lang="ts">
-import { MenuOutlined } from '@ant-design/icons-vue'
+import { DownOutlined, MenuOutlined } from '@ant-design/icons-vue'
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAuthStore } from '../store/authStore'
 import { isMobile } from '../utils'
 import BaseIcon from './BaseIcon.vue'
+
+const { locale } = useI18n()
+const store = useAuthStore()
+const { currentLocale } = storeToRefs(store)
+
 const open = ref(false)
+const locales = [
+  { value: 'ru', label: 'Рус' },
+  { value: 'kk', label: 'Қаз' },
+]
 </script>
