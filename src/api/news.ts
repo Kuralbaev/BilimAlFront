@@ -3,7 +3,7 @@ import axiosInstance from './index'
 
 export async function getNewsFromApi(): Promise<News[]> {
   const { data } = await axiosInstance.get<ApiResponse<News[]>>(
-    '/news?populate=*&sort=publishedAt:desc'
+    '/news?populate=*&sort=publishedAt:desc&pagination[pageSize]=10000000000'
   )
   return data.data
 }
@@ -17,7 +17,7 @@ export async function getNewsByIdFromApi(id: string): Promise<News> {
 
 export async function getYouTubeFromApi(): Promise<News[]> {
   const { data } = await axiosInstance.get<ApiResponse<News[]>>(
-    '/you-tubes?populate=*&sort=publishedAt:desc'
+    '/you-tubes?populate=*&sort=publishedAt:desc&pagination[pageSize]=10000000000'
   )
   return data.data
 }

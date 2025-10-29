@@ -50,9 +50,17 @@
               <div>
                 <div class="flex items-center gap-2 mb-2">
                   <span class="bg-blue-500 px-2 py-1 text-white text-xs">
-                    {{ item.category?.title_ru || $t('news') }}
+                    {{
+                      item.category[
+                        `title_${locale}` as keyof typeof item.category
+                      ] || $t('news')
+                    }}
                   </span>
-                  <p class="text-sm text-gray-500">12.02.2025</p>
+                  <p class="text-sm text-gray-500">
+                    {{
+                      new Date(item?.publishedAt).toLocaleDateString('ru-RU')
+                    }}
+                  </p>
                 </div>
                 <router-link
                   :to="`/news/${item.documentId}`"
