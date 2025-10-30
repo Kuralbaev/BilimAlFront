@@ -66,7 +66,7 @@
                   :to="`/news/${item.documentId}`"
                   class="text-base font-bold line-clamp-2 hover:text-[#00B5EE] transition-colors"
                 >
-                  {{ item.title_ru }}
+                  {{ item[`title_${locale}` as keyof News] }}
                 </router-link>
               </div>
             </div>
