@@ -17,6 +17,8 @@ onMounted(() => {
   loading.value = true
   newsStore.fetchNews()
   newsStore.fetchYouTube()
+  newsStore.fetchBlog()
+  newsStore.fetchTeam()
   loading.value = false
   locale.value = currentLocale.value
 })

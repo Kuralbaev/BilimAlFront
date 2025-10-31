@@ -10,23 +10,16 @@
     />
     <div class="p-3">
       <div class="flex items-center gap-2">
-        <span class="bg-blue-500 px-1 py-1 text-white text-[10px] md:text-xs">
-          {{ news?.category[`title_${locale}` as keyof News] || 'Новости' }}
-        </span>
         <p class="text-[10px] md:text-sm text-gray-500">
           {{ new Date(news?.publishedAt).toLocaleDateString('ru-RU') }}
         </p>
       </div>
       <router-link
-        :to="`/news/${news?.documentId}`"
-        class="text-base md:text-lg font-bold mb-2 line-clamp-2 hover:text-[#00B5EE] transition-colors"
+        :to="`/blog/${news?.documentId}`"
+        class="text-lg font-bold mb-2 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
         {{ news[`title_${locale}` as keyof News] }}
       </router-link>
-      <p
-        class="md:text-sm text-gray-500 line-clamp-2"
-        v-html="news[`description_${locale}` as keyof News]"
-      />
     </div>
   </div>
 </template>

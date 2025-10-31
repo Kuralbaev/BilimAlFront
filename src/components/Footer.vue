@@ -10,13 +10,16 @@
         class="h-20 cursor-pointer mb-5 md:mb-0 mx-auto md:mx-0"
       />
       <ul
-        class="flex w-full justify-center items-center gap-8 text-nowrap text-white"
+        class="md:flex text-center md:text-left space-y-5 md:space-y-0 w-full justify-center items-center gap-8 text-nowrap text-white"
       >
         <li>
           <router-link to="/" exact>{{ $t('main') }}</router-link>
         </li>
         <li>
           <router-link to="/news" exact>{{ $t('news') }}</router-link>
+        </li>
+        <li>
+          <router-link to="/blog" exact>{{ $t('blog') }}</router-link>
         </li>
         <li>
           <router-link to="/youtube" exact>{{ $t('youtube') }}</router-link>

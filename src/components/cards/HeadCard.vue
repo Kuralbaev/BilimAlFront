@@ -6,7 +6,7 @@
     <img
       :src="'https://admin.eduai.kz' + news?.image?.url"
       alt=""
-      class="w-full h-full object-cover opacity-80"
+      class="w-full h-full object-cover opacity-80 block"
     />
     <div
       class="absolute bottom-0 left-0 right-0 text-white"

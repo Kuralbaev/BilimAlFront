@@ -28,3 +28,31 @@ export async function getYouTubeByIdFromApi(id: string): Promise<News> {
   )
   return data.data
 }
+
+export async function getBlogsFromApi(): Promise<News[]> {
+  const { data } = await axiosInstance.get<ApiResponse<News[]>>(
+    '/blogs?populate=*&sort=publishedAt:desc&pagination[pageSize]=10000000000'
+  )
+  return data.data
+}
+
+export async function getTeamFromApi(): Promise<News[]> {
+  const { data } = await axiosInstance.get<ApiResponse<News[]>>(
+    '/teams?populate=*&sort=publishedAt:desc&pagination[pageSize]=10000000000'
+  )
+  return data.data
+}
+
+export async function getBlogByIdFromApi(id: string): Promise<News> {
+  const { data } = await axiosInstance.get<ApiResponse<News>>(
+    `/blogs/${id}?populate=*`
+  )
+  return data.data
+}
+
+export async function getTeamByIdFromApi(id: string): Promise<News> {
+  const { data } = await axiosInstance.get<ApiResponse<News>>(
+    `/teams/${id}?populate=*`
+  )
+  return data.data
+}

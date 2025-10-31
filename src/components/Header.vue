@@ -47,6 +47,16 @@
             </router-link>
           </li>
           <li class="mb-4">
+            <router-link to="/blog" exact class="!text-gray-900">
+              {{ $t('blog') }}
+            </router-link>
+          </li>
+          <li class="mb-4">
+            <router-link to="/team" exact class="!text-gray-900">
+              {{ $t('team') }}
+            </router-link>
+          </li>
+          <li class="mb-4">
             <router-link to="/youtube" exact class="!text-gray-900">
               {{ $t('youtube') }}
             </router-link>
@@ -86,6 +96,16 @@
           </li>
           <li>
             <router-link to="/news" exact>{{ $t('news') }}</router-link>
+          </li>
+          <li>
+            <router-link to="/blog" exact>
+              {{ $t('blog') }}
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/team" exact>
+              {{ $t('team') }}
+            </router-link>
           </li>
           <li>
             <router-link to="/youtube" exact>{{ $t('youtube') }}</router-link>

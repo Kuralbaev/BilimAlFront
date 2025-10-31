@@ -8,9 +8,10 @@ export const useNewsStore = defineStore('news', () => {
 
   const news = ref<News[]>([])
   const youTube = ref<News[]>([])
+  const blog = ref<News[]>([])
+  const team = ref<News[]>([])
   const currentNews = ref<News | null>(null)
   const currentYouTube = ref<News | null>(null)
-
   async function fetchNews() {
     news.value = await newsService.getAll()
   }
@@ -26,8 +27,18 @@ export const useNewsStore = defineStore('news', () => {
     currentYouTube.value = await newsService.getYouTubeById(id)
   }
 
+  async function fetchBlog() {
+    blog.value = await newsService.getBlogs()
+  }
+
+  async function fetchTeam() {
+    team.value = await newsService.getTeam()
+  }
+
   return {
     news,
+    blog,
+    team,
     currentNews,
     youTube,
     currentYouTube,
@@ -35,5 +46,7 @@ export const useNewsStore = defineStore('news', () => {
     fetchYouTube,
     fetchNewsById,
     fetchYouTubeById,
+    fetchBlog,
+    fetchTeam,
   }
 })

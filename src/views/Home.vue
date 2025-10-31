@@ -40,34 +40,70 @@
               :news="item"
             />
           </div>
-          <div class="bg-white p-5 rounded-xl h-max">
-            <h2 class="text-xl font-bold mb-3">{{ $t('latestNews') }}</h2>
-            <div
-              class="card mb-6 rounded-xl"
-              v-for="item in news.slice(0, 3)"
-              :key="item.id"
-            >
-              <div>
-                <div class="flex items-center gap-2 mb-2">
-                  <span class="bg-blue-500 px-2 py-1 text-white text-xs">
-                    {{
-                      item.category[
-                        `title_${locale}` as keyof typeof item.category
-                      ] || $t('news')
-                    }}
-                  </span>
-                  <p class="text-sm text-gray-500">
-                    {{
-                      new Date(item?.publishedAt).toLocaleDateString('ru-RU')
-                    }}
-                  </p>
-                </div>
-                <router-link
-                  :to="`/news/${item.documentId}`"
-                  class="text-base font-bold line-clamp-2 hover:text-[#00B5EE] transition-colors"
+          <div>
+            <div class="bg-white p-5 rounded-xl h-max">
+              <div class="flex items-center justify-between mb-5">
+                <h2 class="text-xl font-bold">{{ $t('blog') }}</h2>
+                <div
+                  class="flex items-center gap-2 cursor-pointer hover:text-[#00B5EE] transition-colors"
+                  @click="$router.push('/blog')"
                 >
-                  {{ item[`title_${locale}` as keyof News] }}
-                </router-link>
+                  {{ $t('viewAll') }}
+                  <ArrowRightOutlined />
+                </div>
+              </div>
+              <div
+                class="card mb-6 rounded-xl"
+                v-for="item in blog.slice(0, 3)"
+                :key="item.id"
+              >
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <p class="text-sm text-gray-500">
+                      {{
+                        new Date(item?.publishedAt).toLocaleDateString('ru-RU')
+                      }}
+                    </p>
+                  </div>
+                  <router-link
+                    :to="`/news/${item.documentId}`"
+                    class="text-base font-bold line-clamp-2 hover:text-[#00B5EE] transition-colors"
+                  >
+                    {{ item[`title_${locale}` as keyof News] }}
+                  </router-link>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl h-max mt-4">
+              <h2 class="text-xl font-bold mb-3">{{ $t('latestNews') }}</h2>
+              <div
+                class="card mb-6 rounded-xl"
+                v-for="item in news.slice(0, 3)"
+                :key="item.id"
+              >
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="bg-blue-500 px-2 py-1 text-white text-xs">
+                      {{
+                        item.category[
+                          `title_${locale}` as keyof typeof item.category
+                        ] || $t('news')
+                      }}
+                    </span>
+                    <p class="text-sm text-gray-500">
+                      {{
+                        new Date(item?.publishedAt).toLocaleDateString('ru-RU')
+                      }}
+                    </p>
+                  </div>
+                  <router-link
+                    :to="`/news/${item.documentId}`"
+                    class="text-base font-bold line-clamp-2 hover:text-[#00B5EE] transition-colors"
+                  >
+                    {{ item[`title_${locale}` as keyof News] }}
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -155,7 +191,7 @@ import { useNewsStore } from '../store/NewsStore'
 import { isMobile } from '../utils'
 const newsStore = useNewsStore()
 
-const { news, youTube } = storeToRefs(newsStore)
+const { news, youTube, blog } = storeToRefs(newsStore)
 const { locale } = useI18n()
 
 const name = ref('')

@@ -4,27 +4,24 @@
     :class="list ? 'grid-cols-[1fr]' : 'grid-cols-[200px_1fr]'"
   >
     <img
-      :src="'https://admin.eduai.kz' + news?.image?.url"
+      :src="'https://admin.eduai.kz' + news?.image?.[0]?.url"
       alt=""
       class="w-full h-full min-h-[140px] object-cover"
     />
     <div class="p-3">
       <div class="flex items-center gap-2">
-        <span class="bg-blue-500 px-1 py-1 text-white text-[10px] md:text-xs">
-          {{ news?.category[`title_${locale}` as keyof News] || 'Новости' }}
-        </span>
-        <p class="text-[10px] md:text-sm text-gray-500">
-          {{ new Date(news?.publishedAt).toLocaleDateString('ru-RU') }}
+        <p class="text-[10px] md:text-sm bg-blue-500 px-1 py-1 text-white">
+          {{ news?.[`position_${locale}` as keyof News] }}
         </p>
       </div>
       <router-link
-        :to="`/news/${news?.documentId}`"
-        class="text-base md:text-lg font-bold mb-2 line-clamp-2 hover:text-[#00B5EE] transition-colors"
+        :to="`/team/${news?.documentId}`"
+        class="text-lg font-bold mb-2 line-clamp-2 hover:text-[#00B5EE] transition-colors"
       >
         {{ news[`title_${locale}` as keyof News] }}
       </router-link>
       <p
-        class="md:text-sm text-gray-500 line-clamp-2"
+        class="text-sm text-gray-500 line-clamp-2"
         v-html="news[`description_${locale}` as keyof News]"
       />
     </div>
