@@ -10,7 +10,7 @@
         />
 
         <div class="flex items-center gap-4">
-          <a-dropdown>
+          <a-dropdown trigger="click">
             <p
               class="cursor-pointer flex items-center gap-2 border border-white rounded-full px-3 py-1 text-white text-sm"
             >
@@ -115,7 +115,7 @@
           </li>
         </ul>
         <div class="flex items-center justify-end gap-4 text-white">
-          <a-dropdown>
+          <a-dropdown trigger="click">
             <p
               class="cursor-pointer flex items-center gap-2 border border-white rounded-full px-3 py-1"
             >
@@ -159,8 +159,4 @@ const store = useAuthStore()
 const { currentLocale } = storeToRefs(store)
 
 const open = ref(false)
-const locales = [
-  { value: 'ru', label: 'Рус' },
-  { value: 'kk', label: 'Қаз' },
-]
 </script>
