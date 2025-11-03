@@ -23,7 +23,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ${{ secrets.SSH_PATH }}
-            git pull origin main
+            sudo git pull
             sudo npm install
             sudo npm run build
             sudo systemctl restart nginx
