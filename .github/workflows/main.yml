@@ -15,12 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Install dependencies
-      #   run: npm install
-
-      # - name: Build project
-      #   run: npm run build
-
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -28,13 +22,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd ${{ secrets.SSH_PATH }}
-            git pull origin main
-            sudo npm install
-            sudo npm run build
-            sudo systemctl restart nginx
-
-      # - name: Deploy to server
-      #   run: |
-      #     ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-      #     "cd ${{ secrets.SSH_PATH }} && git pull origin main && npm install && npm run build"
+            cd ${{ secrets.SSH_PATH }} && git pull origin main && sudo npm install && sudo npm run build && sudo systemctl restart nginx
