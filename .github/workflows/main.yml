@@ -28,11 +28,20 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to server
-        run: |
-          echo "SSH_PRIVATE_KEY: $(cat ~/.ssh/id_rsa)"
-          echo "SSH_USER: ${{ secrets.SSH_USER }}"
-          echo "SSH_HOST: ${{ secrets.SSH_HOST }}"
-          echo "SSH_PATH: ${{ secrets.SSH_PATH }}"
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
-          "cd ${{ secrets.SSH_PATH }} && git pull origin main && npm install && npm run build"
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.SSH_PATH }}
+            git pull origin main
+            npm install
+            npm run build
+            sudo systemctl restart nginx
+
+      # - name: Deploy to server
+      #   run: |
+      #     ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} \
+      #     "cd ${{ secrets.SSH_PATH }} && git pull origin main && npm install && npm run build"
