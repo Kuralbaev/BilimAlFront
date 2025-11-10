@@ -1,7 +1,7 @@
 <template>
   <div class="bg-[#08082c] mt-30 py-20 pt-14">
     <div
-      class="container mx-auto md:grid grid-cols-3 items-center justify-between"
+      class="container mx-auto md:grid grid-cols-[auto_1fr_auto] items-center justify-between"
     >
       <img
         @click="$router.push('/')"
@@ -13,19 +13,59 @@
         class="md:flex text-center md:text-left space-y-5 md:space-y-0 w-full justify-center items-center gap-8 text-nowrap text-white"
       >
         <li>
-          <router-link to="/" exact>{{ $t('main') }}</router-link>
+          <router-link
+            class="hover:text-[#00B5EE] transition-colors"
+            to="/"
+            exact
+          >
+            {{ $t('main') }}
+          </router-link>
         </li>
         <li>
-          <router-link to="/news" exact>{{ $t('news') }}</router-link>
+          <router-link
+            class="hover:text-[#00B5EE] transition-colors"
+            to="/news"
+            exact
+          >
+            {{ $t('news') }}
+          </router-link>
         </li>
         <li>
-          <router-link to="/blog" exact>{{ $t('blog') }}</router-link>
+          <router-link
+            class="hover:text-[#00B5EE] transition-colors"
+            to="/blog"
+            exact
+          >
+            {{ $t('blog') }}
+          </router-link>
         </li>
         <li>
-          <router-link to="/youtube" exact>{{ $t('youtube') }}</router-link>
+          <router-link
+            class="hover:text-[#00B5EE] transition-colors"
+            to="/youtube"
+            exact
+          >
+            {{ $t('youtube') }}
+          </router-link>
         </li>
         <li>
-          <router-link to="/about" exact>{{ $t('about') }}</router-link>
+          <router-link
+            class="hover:text-[#00B5EE] transition-colors"
+            to="/about"
+            exact
+          >
+            {{ $t('about') }}
+          </router-link>
+        </li>
+        <li>
+          <a
+            href="/doc.pdf"
+            download
+            target="_blank"
+            class="hover:text-[#00B5EE] transition-colors"
+          >
+            Лицензия
+          </a>
         </li>
       </ul>
       <div

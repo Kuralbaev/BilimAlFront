@@ -6,7 +6,7 @@
     <img
       :src="'https://admin.eduai.kz' + news?.image?.[0]?.url"
       alt=""
-      class="w-full h-full min-h-[140px] object-cover"
+      class="w-full h-[250px] md:h-[350px] object-cover"
     />
     <div class="p-3">
       <div class="flex items-center gap-2">

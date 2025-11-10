@@ -82,7 +82,7 @@
   <template v-else>
     <div class="bg-[#08082c]">
       <div
-        class="container mx-auto grid grid-cols-3 items-center justify-between"
+        class="container mx-auto grid grid-cols-[auto_1fr_auto] items-center justify-between"
       >
         <img
           @click="$router.push('/')"
@@ -90,7 +90,9 @@
           alt="logo"
           class="h-20 cursor-pointer"
         />
-        <ul class="flex items-center gap-8 text-nowrap text-white">
+        <ul
+          class="flex items-center justify-center gap-8 text-nowrap text-white"
+        >
           <li>
             <router-link to="/" exact>{{ $t('main') }}</router-link>
           </li>
