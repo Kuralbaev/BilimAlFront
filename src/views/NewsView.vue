@@ -24,6 +24,13 @@
                 new Date(currentNews?.publishedAt).toLocaleDateString('ru-RU')
               }}
             </p>
+            <button
+              type="button"
+              class="ml-auto shrink-0 relative z-10 pointer-events-auto cursor-pointer px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
+              @click="shareNews"
+            >
+              Поделиться
+            </button>
           </div>
           <h2 class="text-2xl font-bold mb-4">
             {{ currentNews[`title_${locale}` as keyof typeof currentNews] }}
@@ -69,6 +76,31 @@ const route = useRoute()
 const newsStore = useNewsStore()
 const { currentNews, news } = storeToRefs(newsStore)
 const loading = ref(false)
+
+const shareNews = async () => {
+  if (!currentNews.value) return
+
+  const title = String(
+    currentNews.value[
+      `title_${locale.value}` as keyof typeof currentNews.value
+    ] ?? ''
+  )
+  const url = window.location.href
+  const shareData: ShareData = { title, text: title, url }
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData)
+      return
+    }
+  } catch (error) {
+    if ((error as DOMException)?.name === 'AbortError') return
+  }
+
+  // copy to clipboard
+  await window.navigator.clipboard.writeText(url)
+  window.alert('Ссылка скопирована')
+}
 
 onMounted(async () => {
   loading.value = true
