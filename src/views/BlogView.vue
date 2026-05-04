@@ -17,6 +17,13 @@
                 new Date(currentBlog?.publishedAt).toLocaleDateString('ru-RU')
               }}
             </p>
+            <button
+              type="button"
+              class="ml-auto shrink-0 relative z-10 pointer-events-auto cursor-pointer px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
+              @click="shareNews"
+            >
+              {{ locale === 'ru' ? 'Поделиться' : 'Бөлісу' }}
+            </button>
           </div>
           <h2 class="text-2xl font-bold mb-4">
             {{ currentBlog[`title_${locale}` as keyof typeof currentBlog] }}
@@ -67,6 +74,31 @@ const newsService = useNewsService()
 const { blog } = storeToRefs(newsStore)
 const loading = ref(false)
 const currentBlog = ref<News | null>(null)
+
+const shareNews = async () => {
+  if (!currentBlog.value) return
+
+  const title = String(
+    currentBlog.value[
+      `title_${locale.value}` as keyof typeof currentBlog.value
+    ] ?? ''
+  )
+  const url = window.location.href
+  const shareData: ShareData = { title, text: title, url }
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData)
+      return
+    }
+  } catch (error) {
+    if ((error as DOMException)?.name === 'AbortError') return
+  }
+
+  // copy to clipboard
+  await window.navigator.clipboard.writeText(url)
+  window.alert('Ссылка скопирована')
+}
 
 onMounted(async () => {
   loading.value = true

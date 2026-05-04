@@ -14,6 +14,14 @@
           <h2 class="text-2xl font-bold mb-4">
             {{ currentTeam[`title_${locale}` as keyof typeof currentTeam] }}
           </h2>
+
+          <button
+            type="button"
+            class="ml-auto shrink-0 mb-2 relative z-10 pointer-events-auto cursor-pointer px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-100 transition"
+            @click="shareNews"
+          >
+            {{ locale === 'ru' ? 'Поделиться' : 'Бөлісу' }}
+          </button>
           <p
             class="text-base text-gray-500"
             v-html="currentTeam[`description_${locale}` as keyof News]"
@@ -35,6 +43,31 @@ const route = useRoute()
 const newsService = useNewsService()
 const loading = ref(false)
 const currentTeam = ref<News | null>(null)
+
+const shareNews = async () => {
+  if (!currentTeam.value) return
+
+  const title = String(
+    currentTeam.value[
+      `title_${locale.value}` as keyof typeof currentTeam.value
+    ] ?? ''
+  )
+  const url = window.location.href
+  const shareData: ShareData = { title, text: title, url }
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData)
+      return
+    }
+  } catch (error) {
+    if ((error as DOMException)?.name === 'AbortError') return
+  }
+
+  // copy to clipboard
+  await window.navigator.clipboard.writeText(url)
+  window.alert('Ссылка скопирована')
+}
 
 onMounted(async () => {
   loading.value = true
